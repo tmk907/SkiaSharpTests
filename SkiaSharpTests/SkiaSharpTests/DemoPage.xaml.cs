@@ -19,10 +19,12 @@ namespace SkiaSharpTests
         private bool _isPageActive = false;
         private Renderer _renderer;
         private IEmitter<SKParticle2D> _emitter;
+        private double _density;
 
         public DemoPage()
         {
             InitializeComponent();
+            _density = Xamarin.Essentials.DeviceDisplay.MainDisplayInfo.Density;
         }
 
         protected override void OnAppearing()
@@ -39,7 +41,7 @@ namespace SkiaSharpTests
                     new Gravity()
                 }
             };
-            _renderer = new Renderer(_emitter, 5);
+            _renderer = new Renderer(_emitter, (int)(5 *_density));
             canvas.PaintSurface += Canvas_PaintSurface;
 
             Device.StartTimer(TimeSpan.FromSeconds(1.0 / 30.0), () =>
@@ -68,7 +70,10 @@ namespace SkiaSharpTests
         {
             if (args.Type == TouchTracking.TouchActionType.Pressed)
             {
-                var ppi = new PointParticleInitializer(new Window(Height, Width), new Vector2(args.Location.X, args.Location.Y));
+                var x = args.Location.X * _density;
+                var y = args.Location.Y * _density;
+
+                var ppi = new PointParticleInitializer(new Window(Height, Width), new Vector2((float)x, (float)y));
                 var emitter = new Emitter<SKParticle2D>(ppi, 100)
                 {
                     //AvgLife = 5,
