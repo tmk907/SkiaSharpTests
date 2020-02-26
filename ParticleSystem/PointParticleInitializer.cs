@@ -13,7 +13,6 @@ namespace ParticleSystem
             SetStartColor(new Color("#FF0000"));
             SetEndColor(new Color("#1100FF00"));
 
-
             _position = position;
         }
 

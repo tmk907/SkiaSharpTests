@@ -4,15 +4,15 @@ using System.Numerics;
 
 namespace ParticleSystem
 {
-    public class Emitter : IEmitter
+    public class Emitter<T> : IEmitter<T> where T : Particle2D, new()
     {
         private Random rnd;
 
         private int totalParticles;
         private int indexOfLastAlive;
-        private Particle2D[] particles;
+        private T[] particles;
 
-        public Particle2D[] Particles { get { return particles; } }
+        public T[] Particles { get { return particles; } }
 
         public int MaxParticleCount { get { return totalParticles; } }
         public int AliveParticleCount { get { return indexOfLastAlive + 1; } }
@@ -45,10 +45,10 @@ namespace ParticleSystem
             emitCounter = 0;
             avgLife = 3;
 
-            particles = new Particle2D[totalParticles];
+            particles = new T[totalParticles];
             for (int i = 0; i < totalParticles; i++)
             {
-                particles[i] = new Particle2D();
+                particles[i] = new T();
             }
             this.particleInitializer = particleInitializer;
             particleInitializer.SetAverageParticleLife(avgLife);
@@ -87,7 +87,7 @@ namespace ParticleSystem
             }
         }
 
-        private void Update(Particle2D particle, float dt)
+        private void Update(T particle, float dt)
         {
             particle.Position += particle.Velocity * dt;
             particle.Velocity += Vector2.Divide(particle.Forces, particle.Mass) * dt;

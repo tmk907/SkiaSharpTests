@@ -1,8 +1,8 @@
 ﻿namespace ParticleSystem
 {
-    public interface IEmitter
+    public interface IEmitter<T> where T: Particle2D
     {
-        Particle2D[] Particles { get; }
+        T[] Particles { get; }
 
         int MaxParticleCount { get; }
         int AliveParticleCount { get; }

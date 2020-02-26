@@ -1,5 +1,4 @@
 ﻿using System.Numerics;
-using SkiaSharp;
 
 namespace ParticleSystem
 {
@@ -17,9 +16,6 @@ namespace ParticleSystem
 
         public bool IsDead => Life <= 0;
 
-        private SKPoint _point;
-        private SKPaint _paint;
-
         public Particle2D()
         {
             Position = Vector2.Zero;
@@ -29,9 +25,6 @@ namespace ParticleSystem
             Color = Vector4.Zero;
             Mass = 1f;
             Life = 0f;
-
-            _point = new SKPoint();
-            _paint = new SKPaint();
         }
 
         public void AddForce(Vector2 force)
@@ -42,19 +35,6 @@ namespace ParticleSystem
         public void ClearForces()
         {
             Forces = Vector2.Zero;
-        }
-
-        public SKPoint GetPoint()
-        {
-            _point.X = Position.X;
-            _point.Y = Position.Y;
-            return _point;
-        }
-
-        public SKPaint GetPaint()
-        {
-            _paint.Color = Color.ToColor();
-            return _paint;
         }
     }
 }

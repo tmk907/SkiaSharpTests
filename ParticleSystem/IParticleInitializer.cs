@@ -1,6 +1,4 @@
-﻿using SkiaSharp;
-
-namespace ParticleSystem
+﻿namespace ParticleSystem
 {
     public interface IParticleInitializer
     {

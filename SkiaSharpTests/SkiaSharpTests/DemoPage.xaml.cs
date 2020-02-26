@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using ParticleSystem;
 using ParticleSystem.Forces;
 using SkiaSharp.Views.Forms;
+using SkiaSharpTests.Particles;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,8 +18,7 @@ namespace SkiaSharpTests
     {
         private bool _isPageActive = false;
         private Renderer _renderer;
-        private IEmitter _emitter;
-
+        private IEmitter<SKParticle2D> _emitter;
 
         public DemoPage()
         {
@@ -31,7 +31,7 @@ namespace SkiaSharpTests
             _isPageActive = true;
 
             var ppi = new PointParticleInitializer(new Window(Height, Width), new Vector2(300, 200));
-            _emitter = new Emitter(ppi, 100)
+            _emitter = new Emitter<SKParticle2D>(ppi, 100)
             {
                 //AvgLife = 5,
                 Forces = new List<IApplyForce>()
@@ -69,13 +69,13 @@ namespace SkiaSharpTests
             if (args.Type == TouchTracking.TouchActionType.Pressed)
             {
                 var ppi = new PointParticleInitializer(new Window(Height, Width), new Vector2(args.Location.X, args.Location.Y));
-                var emitter = new Emitter(ppi, 100)
+                var emitter = new Emitter<SKParticle2D>(ppi, 100)
                 {
                     //AvgLife = 5,
                     Forces = new List<IApplyForce>()
-                {
-                    new Gravity()
-                }
+                    {
+                        new Gravity()
+                    }
                 };
                 _renderer.AddEmitter(emitter);
             }

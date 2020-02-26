@@ -1,24 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ParticleSystem;
 using SkiaSharp;
 
-namespace ParticleSystem
+namespace SkiaSharpTests.Particles
 {
     public class Renderer
     {
-        private readonly List<IEmitter> _emitters;
+        private readonly List<IEmitter<SKParticle2D>> _emitters;
         private readonly float _pointSize;
 
-        public Renderer(IEmitter emitter, float pointSize)
+        public Renderer(IEmitter<SKParticle2D> emitter, float pointSize)
         {
-            _emitters = new List<IEmitter>() { emitter };
+            _emitters = new List<IEmitter<SKParticle2D>>() { emitter };
             _pointSize = pointSize;
         }
 
-        public Renderer(List<IEmitter> emitters, float pointSize)
+        public Renderer(List<IEmitter<SKParticle2D>> emitters, float pointSize)
         {
-            _emitters = new List<IEmitter>(emitters);
+            _emitters = new List<IEmitter<SKParticle2D>>(emitters);
             _pointSize = pointSize;
         }
 
@@ -34,7 +34,7 @@ namespace ParticleSystem
             }
         }
 
-        public void AddEmitter(IEmitter emitter)
+        public void AddEmitter(IEmitter<SKParticle2D> emitter)
         {
             _emitters.Add(emitter);
         }

@@ -53,6 +53,7 @@ namespace SkiaSharpTests.UWP
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
                 Xamarin.Forms.Forms.Init(e, new[] { typeof(TouchTracking.Forms.UWP.TouchEffect).Assembly });
+                //Xamarin.Forms.Forms.Init(e);
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
